@@ -10,6 +10,7 @@ read key &&
 [ "$key" = "y" ] &&
 ./setup_pi.sh &&
 #./setup_of.sh &&
+#./setup_gphotos2.sh &&
 
 echo "Done."
 
