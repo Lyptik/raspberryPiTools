@@ -1,0 +1,209 @@
+# Force inclusion of .profile
+if [ -f ~/.profile ]; then
+    . ~/.profile
+fi
+
+## Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=100000
+SAVEHIST=1000000
+setopt appendhistory extendedglob nomatch notify
+unsetopt autocd beep
+bindkey -e
+# End of lines configured by zsh-newuser-install
+
+## The following lines were added by compinstallz
+zstyle :compinstall filename "$HOME/.zshrc"
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+## Miscellaneous
+
+# Change directory by just typing its name
+setopt auto_cd
+
+# History
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+# Same history for all sessions
+setopt share_history
+
+# I DON'T KNOW WHAT THIS DOES
+autoload terminfo colors
+
+# Colorized terminal
+colors
+
+# Colorized man pages
+export LESS_TERMCAP_mb=$'\e[0m'  # ?
+export LESS_TERMCAP_md=$'\e[0m'  # titles/important
+export LESS_TERMCAP_me=$'\e[0m'  # ?
+export LESS_TERMCAP_se=$'\e[0m'  # ?
+export LESS_TERMCAP_so=$'\e[33m' # status
+export LESS_TERMCAP_ue=$'\e[0m'  # ?
+export LESS_TERMCAP_us=$'\e[36m' # emphasized
+
+# I DON'T KNOW WHAT THIS DOES
+watch=all
+
+# Go to actual pointed file when following a link
+setopt chase_links
+
+# Infer words from abbreviations
+setopt complete_in_word
+
+## Completion
+
+# Dedicated format
+zstyle ':completion:*:*:cd:*' tag-order local-directories path-directories
+zstyle ':completion:*:rm:*' ignore-line yes
+# Completion menu for 'kill'
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:kill:*'   force-list always
+
+# Color for completion
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# Menu for auto-completion
+zstyle ':completion:*' menu select=2
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+
+# Remove trailing slashes when completing directories
+zstyle ':completion:*' squeeze-slashes true
+
+# Cache
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path ~/.zsh/cache
+
+# Error correction
+#zstyle ':completion:*' completer _complete _match _approximate
+#zstyle ':completion:*:match:*' original only
+#zstyle ':completion:*:approximate:*' max-errors 1 numeric
+
+## Bind keys
+
+# The following are handled by 'bindkey -e' since they are from emacs
+# Search
+#bindkey "^S" history-incremental-search-forward
+#bindkey "^R" history-incremental-search-backward
+
+# Navigate in the line
+#bindkey '^A' beginning-of-line
+#bindkey '^E' end-of-line
+#bindkey '^K' kill-line
+
+# Search characters up to the cursor in the history
+bindkey '\e[A' history-beginning-search-backward
+bindkey '\e[B' history-beginning-search-forward
+
+## Terminal editing
+
+# Hint : type ctrl+V and then type your sequence to find its code
+
+# Common to linux and mac
+bindkey '^[[3~' delete-char          # del
+bindkey '^[[F' end-of-line           # home
+bindkey '^[[H' beginning-of-line     # end
+
+case `uname` in
+
+  Darwin)
+    bindkey '[D' backward-word           # alt left
+    #bindkey ';5D' backward-word          # ctrl left
+    bindkey '[C' forward-word            # alt right
+    #bindkey ';5C' forward-word           # ctrl right
+    ;;
+
+  Linux)
+    bindkey ';3D' backward-word           # alt left
+    bindkey ';5D' backward-word           # ctrl left
+    bindkey '3~' kill-word                # alt del
+    bindkey '5~' kill-word                # ctrl del
+    bindkey ';3C' forward-word            # alt right
+    bindkey ';5C' forward-word            # ctrl right
+    ;;
+esac
+
+#bindkey '/e^?' backward-kill-word    # alt backspace
+
+for f in /etc/DIR_COLORS ${HOME}/.dir_colors; do
+	[ -f "$f" ] && eval `dircolors -b "$f"`
+done
+
+# Prompt
+
+# Remove right prompt after a command is run
+setopt transient_rprompt
+
+local nocolor="%{$terminfo[sgr0]%}"
+local green="%{$nocolor$fg[green]%}"
+local red="%{$nocolor$fg[red]%}"
+local blue="%{$nocolor$fg[blue]%}"
+local cyan="%{$nocolor$fg[cyan]%}"
+local darkgreen="%{$nocolor$fg[green]%}"
+local darkred="%{$nocolor$fg[red]%}"
+local darkblue="%{$nocolor$fg[blue]%}"
+local darkcyan="%{$nocolor$fg[cyan]%}"
+local magenta="%{$nocolor$fg[magenta]%}"
+#PS1="${darkred}%n${nocolor}@${green}%m${nocolor}: ${magenta}%~${nocolor}%#${nocolor} "
+#RPS1=" %{$fg[blue]%}%D{%d/%m/%y %H:%M:%S}%{$terminfo[sgr0]%}"
+
+RPS1="  %{$fg[blue]%}%D{%d/%m/%y %H:%M:%S}%{$terminfo[sgr0]%}"
+PS2="%{$fg[cyan]%}%_>%{$terminfo[sgr0]%} "
+PS3="%{$fg[cyan]%}?#%{$terminfo[sgr0]%} "
+PS1="${darkred}%n${nocolor}@${green}%m${nocolor}:${magenta}%~${nocolor}%#${nocolor} "
+
+# Operations
+#function title {
+#
+#}
+
+function precmd {
+
+}
+
+function preexec {
+
+}
+
+## Alias
+# File Extensions
+for ext in html org com net ch; do alias -s $ext="browse.sh"; done
+for ext in txt conf tex c h cpp hpp PKGBUILD; do alias -s $ext=$EDITOR; done
+for ext in png jpg gif; do alias -s $ext=feh; done
+for ext in mpg wmv avi mkv; do alias -s $ext=mplayer; done
+#for ext in wav mp3 ogg; do alias -s $ext=$SNDPLAY; done
+for ext in sxw doc rtf odt xls ods odf; do alias -s $ext=soffice; done
+
+alias -s pdf="zathura"
+alias -s gz="tar -zxvf"
+alias -s bz2="tar -jxvf"
+alias -s rar="unrar x"
+alias -s zip="unzip"
+
+#alias -g school='$HOME/epfl/ba5/'
+alias -g C='| wc -c'
+alias -g G='| grep'
+alias -g L='| less'
+alias -g N='> /dev/null 2>&1'
+alias -g W='| wc -l'
+
+alias cd..="cd .."
+
+# Color and ornaments for ls
+case `uname` in
+
+  Darwin)
+    alias ls='ls -F'
+    alias ll='ls -lahF'
+    #alias ls='ls -FG'
+    ;;
+
+  Linux)
+    alias ls='ls -F --color=auto'
+    alias ll='ls -lahF --color=auto'
+    ;;
+esac
+

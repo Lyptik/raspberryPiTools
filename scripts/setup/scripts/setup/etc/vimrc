@@ -1,0 +1,4 @@
+syntax on
+set background=dark
+set fileencoding=utf-8
+set nocompatible
