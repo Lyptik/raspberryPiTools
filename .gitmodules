@@ -1,0 +1,6 @@
+[submodule "submodules/gphoto2-updater"]
+	path = submodules/gphoto2-updater
+	url = https://github.com/gonzalo/gphoto2-updater.git
+[submodule "submodules/RetroPie-Setup"]
+	path = submodules/RetroPie-Setup
+	url = https://github.com/petrockblog/RetroPie-Setup.git
