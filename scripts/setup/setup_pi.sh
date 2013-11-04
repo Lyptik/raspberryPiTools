@@ -2,6 +2,8 @@
 
 # Script for raspberry pi system installation
 
+echo "Upgrading firmware" &&
+sudo rpi-update &&
 echo "Updating and upgrading system..." &&
 sudo apt-get clean && sudo apt-get update && sudo apt-get -y --force-yes upgrade &&
 echo "Adding mDns Avahi daemon" &&
@@ -24,7 +26,7 @@ sudo apt-get -y --force-yes install build-essential git valgrind gdb cmake pkg-c
 
 echo "Installing software dev env..." &&
 sudo apt-get update && sudo apt-get upgrade -y --force-yes &&
-sudo apt-get install -y --force-yes qtcreator &&
+sudo apt-get install -y --force-yes python-pip qtcreator &&
 
 echo "Done."
 
