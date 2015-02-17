@@ -9,7 +9,7 @@ sudo apt-get clean && sudo apt-get update && sudo apt-get -y --force-yes upgrade
 echo "Adding mDns Avahi daemon" &&
 sudo apt-get install -y --force-yes libnss-mdns &&
 echo "Installing basic packages..." &&
-sudo apt-get -y --force-yes install zsh vim screen htop x11vnc scalpel ssh ntp netplug sshfs &&
+sudo apt-get -y --force-yes install zsh vim screen htop x11vnc git scalpel ssh ntp netplug sshfs &&
 echo "Configuring zsh and vim..." &&
 [ -f etc/zshrc ] && cp etc/zshrc ~/.zshrc 
 [ -f etc/vimrc ] && cp etc/vimrc ~/.vimrc 
