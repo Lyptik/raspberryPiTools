@@ -28,8 +28,16 @@ if [ `cat /etc/default/rcS | grep -x "RAMTMP=yes"` ]; then
 	echo "You are continuing at your own risk ! good luck !"
 fi
 
+echo "Disabling swap"
+
+dphys-swapfile swapoff
+dphys-swapfile uninstall
+update-rc.d dphys-swapfile disabl
+
 echo "Modifying ftab and config to mount partition in readonly"
 
+# Prevent system trying to rm tmp file during boot
+sed -i 's/#TMPTIME=0/TMPTIME=-1/' /etc/default/rcS
 echo "RAMTMP=yes" >> /etc/default/rcS
 
 sed -i '2s/defaults/defaults,ro/' /etc/fstab
