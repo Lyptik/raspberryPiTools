@@ -12,6 +12,22 @@ if [ "$(id -u)" != "0" ]; then
 	exit 1
 fi
 
+# Check if script has already been run
+
+key=n
+
+if [ `cat /etc/default/rcS | grep -x "RAMTMP=yes"` ]; then
+	
+	echo "Your system seems to be already readonly able ! We strongly suggest to exit right now !" &&
+	echo "Are you sure you want to continue ? (y/n)" &&
+        read  -r -p "" key
+        echo "" &&
+
+        [ "$key" != "y" ] && exit 1
+
+	echo "You are continuing at your own risk ! good luck !"
+fi
+
 echo "Modifying ftab and config to mount partition in readonly"
 
 echo "RAMTMP=yes" >> /etc/default/rcS
