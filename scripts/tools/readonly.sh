@@ -61,10 +61,10 @@ fi
 
 echo "Installing tools to easy remount in readonly or readwrite"
 
-echo "mount -o remount,rw /" >> /usr/local/bin/remountrw
+echo "mount -o remount,rw /\nmount -o remount,rw /boot" > /usr/local/bin/remountrw
 chmod +x /usr/local/bin/remountrw
 
-echo "mount -o remount,ro /" >> /usr/local/bin/remountro
+echo "mount -o remount,ro /\nmount -o remount,rw /boot" > /usr/local/bin/remountro
 chmod +x /usr/local/bin/remountro
 
 echo "You can now use remountrw and remountro command, have fun !"
