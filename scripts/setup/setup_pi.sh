@@ -19,6 +19,9 @@ echo "Configuring git..." &&
 git config --global color.status auto &&
 git config --global color.branch auto &&
 git config --global core.editor vim  &&
+git config --global alias.st status
+git config --global alias.br branch
+git config --global alias.co checkout
 git config --list &&
 echo "Installing dev env..." &&
 sudo apt-get -y --force-yes install build-essential git valgrind gdb cmake pkg-config &&
