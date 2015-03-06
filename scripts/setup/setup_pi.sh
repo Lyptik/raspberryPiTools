@@ -2,8 +2,9 @@
 
 # Script for raspberry pi system installation
 
+# Admitting you are on a fresh install, your default password is raspberry
 echo "Upgrading firmware" &&
-sudo rpi-update &&
+echo "raspberry" | sudo -S rpi-update &&
 echo "Updating and upgrading system..." &&
 sudo apt-get clean && sudo apt-get update && sudo apt-get -y --force-yes upgrade &&
 echo "Adding mDns Avahi daemon" &&
