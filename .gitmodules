@@ -4,3 +4,6 @@
 [submodule "submodules/RetroPie-Setup"]
 	path = submodules/RetroPie-Setup
 	url = https://github.com/petrockblog/RetroPie-Setup.git
+[submodule "submodules/pi_video_looper"]
+	path = submodules/pi_video_looper
+	url = https://github.com/Lyptik/pi_video_looper.git
