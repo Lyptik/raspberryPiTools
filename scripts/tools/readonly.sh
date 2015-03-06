@@ -32,7 +32,7 @@ echo "Disabling swap"
 
 dphys-swapfile swapoff
 dphys-swapfile uninstall
-update-rc.d dphys-swapfile disabl
+update-rc.d dphys-swapfile disable
 
 echo "Modifying ftab and config to mount partition in readonly"
 
@@ -44,7 +44,7 @@ sed -i '2s/defaults/defaults,ro/' /etc/fstab
 sed -i '3s/noatime/noatime,ro/' /etc/fstab
 
 echo "tmpfs           /tmp            tmpfs   nodev,nosuid,size=30M,mode=1777    0    0
-tmpfs           /var/log           tmpfs   nodev,nosuid,size=30M,mode=1777    0    0" >> fstab
+tmpfs           /var/log           tmpfs   nodev,nosuid,size=30M,mode=1777    0    0" >> /etc/fstab
 
 sed -i '60s/-f/-L/' /etc/init.d/hwclock.sh
 
